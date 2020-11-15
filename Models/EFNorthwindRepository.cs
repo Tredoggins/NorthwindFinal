@@ -19,6 +19,8 @@ namespace Northwind.Models
         public IQueryable<Product> Products => context.Products;
         public IQueryable<Discount> Discounts => context.Discounts;
         public IQueryable<Customer> Customers => context.Customers;
+        public IQueryable<Employee> Employees => context.Employees;
+        public IQueryable<Order> Orders => context.Orders;
 
         public void AddCustomer(Customer customer)
         {
