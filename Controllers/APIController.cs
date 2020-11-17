@@ -34,5 +34,8 @@ namespace Northwind.Controllers
         // adds a row to the cartitem table
         public CartItem Post([FromBody] CartItemJSON cartItem) => repository.AddToCart(cartItem);
 
+        [HttpGet, Route("api/order")]
+        public IEnumerable<Order> GetOrders() => repository.Orders.OrderBy(o => o.RequiredDate);
+
     }
 }

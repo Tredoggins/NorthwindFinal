@@ -17,9 +17,10 @@ namespace Northwind.Models
         public IQueryable<Discount> Discounts => context.Discounts;
         public IQueryable<Customer> Customers => context.Customers;
 
-        public IQueryable<Employee> Employees => throw new System.NotImplementedException();
+        public IQueryable<Employee> Employees => context.Employees;
 
-        public IQueryable<Order> Orders => throw new System.NotImplementedException();
+        public IQueryable<Order> Orders => context.Orders;
+        public IQueryable<CartItem> CartItems => context.CartItems;
 
         public void AddCustomer(Customer customer)
         {

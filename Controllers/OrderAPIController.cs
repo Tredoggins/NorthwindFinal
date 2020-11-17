@@ -12,7 +12,5 @@ namespace Northwind.Controllers
         private INorthwindRepository repository;
         public OrderAPIController(INorthwindRepository repo) => repository = repo;
 
-        [HttpGet, Route("api/order")]
-        public IEnumerable<Order> Get() => repository.Orders.OrderBy(o => o.RequiredDate);
     }
 }
