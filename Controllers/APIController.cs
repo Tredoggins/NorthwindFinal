@@ -35,7 +35,10 @@ namespace Northwind.Controllers
         public CartItem Post([FromBody] CartItemJSON cartItem) => repository.AddToCart(cartItem);
 
         [HttpGet, Route("api/order")]
-        public IEnumerable<Order> GetOrders() => repository.Orders.OrderBy(o => o.RequiredDate);
+        public IEnumerable<Order> GetOrders()
+        {
+            return repository.Orders.OrderBy(o=>o.RequiredDate);
+        }
 
     }
 }

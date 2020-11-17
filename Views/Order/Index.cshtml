@@ -17,8 +17,8 @@
         </tr>
         <tr>
             <th scope="col">Order ID</th>
-            <th scope="col">Customer</th>
-            <th scope="col">Employee</th>
+            <th scope="col">CustomerId</th>
+            <th scope="col">EmployeeId</th>
             <th scope="col">Order Date</th>
             <th scope="col">Required Date</th>
             <th scope="col">Shipping Address</th>
@@ -38,14 +38,14 @@
                 $.getJSON({
                     url: "../../api/order/",
                     success: function (response, textStatus, jqXhr) {
-                        //console.log(response);
+                        console.log(response);
                         $('#product_rows').html("");
                         for (var i = 0; i < response.length; i++) {
                             // var css = response[i].shipped ? " class=\"shipped\"" : "";
-                            var row = "<tr>"
+                            var row = "<tr" + ">"
                                 + "<td>" + response[i].OrderId + "</td>"
-                                + "<td>" + response[i].Customer.FirstName + response[i].Customer.LastName + "</td>"
-                                + "<td>" + response[i].Employee.FirstName + response[i].Employee.LastName + "</td>"
+                                + "<td>" + response[i].CustomerId+ "</td>"
+                                + "<td>" + response[i].EmployeeId+ "</td>"
                                 + "<td>" + response[i].OrderDate + "</td>"
                                 + "<td>" + response[i].RequiredDate + "</td>"
                                 + "<td>"
