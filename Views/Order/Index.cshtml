@@ -6,10 +6,29 @@
         <tr>
             <th scope="col">
                 <div class="form-row">
+                    <div class="form-group col-md-12 mb-0">
+                        <div class="form-date" style="display:inline">
+                            <label class="form-date-label" for="Date">Orders After: </label>
+                            <input class="form-date-input text-right" type="date" id="Date">
+                            <input class="btn btn-primary text-right" type="button" id="Clear" value="Clear Date"/>
+                        </div>
+                    </div>
                     <div class="form-group col-md-4 mb-0">
-                        <div class="form-check text-right">
+                        <div class="form-check text-left">
                             <input class="form-check-input" type="checkbox" id="Shipped">
                             <label class="form-check-label" for="Shipped">Shipped</label>
+                        </div>
+                        <div class="form-check text-left">
+                            <input class="form-check-input" type="checkbox" id="Overdue">
+                            <label class="form-check-label" for="Overdue">Overdue</label>
+                        </div>
+                        <div class="form-check text-left">
+                            <input class="form-check-input" type="checkbox" id="Close">
+                            <label class="form-check-label" for="Close">Close</label>
+                        </div>
+                        <div class="form-check text-left">
+                            <input class="form-check-input" type="checkbox" id="Others">
+                            <label class="form-check-label" for="Others">Other</label>
                         </div>
                     </div>
                 </div>
@@ -17,53 +36,17 @@
         </tr>
         <tr>
             <th scope="col">Order ID</th>
-            <th scope="col">CustomerId</th>
-            <th scope="col">EmployeeId</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Employee</th>
             <th scope="col">Order Date</th>
             <th scope="col">Required Date</th>
             <th scope="col">Shipping Address</th>
 </thead>
-    <tbody id="product_rows">
+    <tbody id="order_rows">
     </tbody>
 </table>
 
 @section scripts
 {
-    <script>// Turn off ESLint (Windows): Tools - Options - Text Editor - Javascript - Linting
-        $(function () {
-            getOrders()
-
-            function getOrders() {
-                // var shipped = $('#Shipped').prop('checked') ? "" : "/shipped/false";
-                $.getJSON({
-                    url: "../../api/order/",
-                    success: function (response, textStatus, jqXhr) {
-                        console.log(response);
-                        $('#product_rows').html("");
-                        for (var i = 0; i < response.length; i++) {
-                            // var css = response[i].shipped ? " class=\"shipped\"" : "";
-                            var row = "<tr" + ">"
-                                + "<td>" + response[i].OrderId + "</td>"
-                                + "<td>" + response[i].CustomerId+ "</td>"
-                                + "<td>" + response[i].EmployeeId+ "</td>"
-                                + "<td>" + response[i].OrderDate + "</td>"
-                                + "<td>" + response[i].RequiredDate + "</td>"
-                                + "<td>"
-                                    + response[i].ShipAddress
-                                    + response[i].ShipCity
-                                    + response[i].ShipRegion
-                                    + response[i].ShipPostalCode
-                                    + response[i].ShipCountry
-                                + "</td>"
-                                + "</tr>";
-                            $('#product_rows').append(row);
-                        }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        // log the error to the console
-                        console.log("The following error occured: " + textStatus, errorThrown);
-                    }
-                });
-            }
-        });</script>
+    <script src="~/js/order.js"></script>
 }

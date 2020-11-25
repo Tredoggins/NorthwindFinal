@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Northwind.Models;
 
 namespace Northwind.Controllers
@@ -37,8 +40,35 @@ namespace Northwind.Controllers
         [HttpGet, Route("api/order")]
         public IEnumerable<Order> GetOrders()
         {
-            return repository.Orders.OrderBy(o=>o.RequiredDate);
+            return repository.Orders.Include("Employee").Include("Customer").OrderBy(o=>o.RequiredDate);
         }
-
+        [HttpGet, Route("api/order/filter/{filter1}/{filter2}/{filter3}/{filter4}")]
+        public IEnumerable<Order> GetShipped(string filter1,string filter2,string filter3,string filter4)
+        {
+            IEnumerable<Order> final=GetOrders();
+            if (filter1== "1")
+            {
+                final = GetOrders().Where(o => o.ShippedDate != null);
+            }
+            if (filter2=="1")
+            {
+                final = (final.Count()<GetOrders().Count()?final.Union(GetOrders().Where(o => o.RequiredDate <= DateTime.Now&&o.ShippedDate==null)): GetOrders().Where(o => o.RequiredDate <= DateTime.Now && o.ShippedDate == null));
+            }
+            if (filter3 == "1")
+            {
+                final = (final.Count() < GetOrders().Count() ? final.Union(GetOrders().Where(o => o.RequiredDate.Subtract(DateTime.Now).TotalDays < 7&& o.RequiredDate.Subtract(DateTime.Now).TotalDays > 0 && o.ShippedDate==null)) : GetOrders().Where(o => o.RequiredDate.Subtract(DateTime.Now).TotalDays < 7 && o.RequiredDate.Subtract(DateTime.Now).TotalDays > 0 && o.ShippedDate == null));
+            }
+            if (filter4 == "1")
+            {
+                final = (final.Count() < GetOrders().Count() ? final.Union(GetOrders().Where(o => o.RequiredDate.Subtract(DateTime.Now).TotalDays > 7)) : GetOrders().Where(o => o.RequiredDate.Subtract(DateTime.Now).TotalDays > 7));
+            }
+            return final;
+        }
+        [HttpGet,Route("api/order/filter/{filter1}/{filter2}/{filter3}/{filter4}/afterdate/{Year}/{Month}/{Day}")]
+        public IEnumerable<Order> GetOrdersAfterDate(string filter1, string filter2, string filter3, string filter4, int year,int month,int day)
+        {
+            DateTime myDate = new DateTime(year, month, day);
+            return GetShipped(filter1,filter2,filter3,filter4).Where(o => o.OrderDate >= myDate);
+        }
     }
 }

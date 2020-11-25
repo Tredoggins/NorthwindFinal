@@ -41,7 +41,10 @@
                     <div class="dropdown-menu" aria-labelledby="customerDropdown">
                         @if (User?.Identity?.IsAuthenticated ?? false)
                         {
-                            <a class="dropdown-item" asp-controller="Customer" asp-action="Account"><i class="fas fa-user"></i> Account</a>
+                            @if (User?.IsInRole("Customer") ?? false)
+                            {
+                                <a class="dropdown-item" asp-controller="Customer" asp-action="Account"><i class="fas fa-user"></i> Account</a>
+                            }
                             <a class="dropdown-item" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
                         }
                         else
@@ -51,6 +54,12 @@
                         }
                     </div>
                 </li>
+                @if (User?.IsInRole("Employee") ?? false)
+                {
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Order" asp-action="Index"><i class="fas fa-archive"></i> Orders</a>
+                </li>
+                }
             </ul>
              @if (User?.Identity?.IsAuthenticated ?? false)
             {
