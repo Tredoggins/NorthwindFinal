@@ -18,8 +18,8 @@
                     var oDate = new Date(response[i].orderDate.split("T")[0]);
                     var rDate = new Date(response[i].requiredDate.split("T")[0]);
                     var css = response[i].shippedDate ? " class=\"text-success\"" :
-                        ((rDate - Date.now()) / 1000 / 60 / 60 / 24 < 7 && (rDate - Date.now()) / 1000 / 60 / 60 / 24 >=-1 ? " class=\"text-warning\"" :
-                            (Date.now() > rDate ? " class=\"text-danger\"" : ""));
+                        ((rDate - Date.now()) / 1000 / 60 / 60 / 24 < 6 && (rDate - Date.now()) / 1000 / 60 / 60 / 24 >0 ? " class=\"text-warning\"" :
+                            (Date.now() >= rDate ? " class=\"text-danger\"" : ""));
                     var row = "<tr"+ css + ">"
                         + "<td>" + response[i].orderId + "</td>"
                         + "<td>" + response[i].customer.companyName + "</td>"
