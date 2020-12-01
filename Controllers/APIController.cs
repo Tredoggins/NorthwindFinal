@@ -56,11 +56,15 @@ namespace Northwind.Controllers
             }
             if (filter3 == "1")
             {
-                final = (final.Count() < GetOrders().Count() ? final.Union(GetOrders().Where(o => o.RequiredDate.Subtract(DateTime.Now).TotalDays < 7&& o.RequiredDate.Subtract(DateTime.Now).TotalDays > 0 && o.ShippedDate==null)) : GetOrders().Where(o => o.RequiredDate.Subtract(DateTime.Now).TotalDays < 7 && o.RequiredDate.Subtract(DateTime.Now).TotalDays > 0 && o.ShippedDate == null));
+                final = (final.Count() < GetOrders().Count() ? final.Union(GetOrders().Where(o => o.RequiredDate.Subtract(DateTime.Now).TotalDays < 6&& o.RequiredDate.Subtract(DateTime.Now).TotalDays > 0 && o.ShippedDate==null)) : GetOrders().Where(o => o.RequiredDate.Subtract(DateTime.Now).TotalDays < 6 && o.RequiredDate.Subtract(DateTime.Now).TotalDays > 0 && o.ShippedDate == null));
             }
             if (filter4 == "1")
             {
-                final = (final.Count() < GetOrders().Count() ? final.Union(GetOrders().Where(o => o.RequiredDate.Subtract(DateTime.Now).TotalDays > 7)) : GetOrders().Where(o => o.RequiredDate.Subtract(DateTime.Now).TotalDays > 7));
+                final = (final.Count() < GetOrders().Count() ? final.Union(GetOrders().Where(o => o.RequiredDate.Subtract(DateTime.Now).TotalDays > 6)) : GetOrders().Where(o => o.RequiredDate.Subtract(DateTime.Now).TotalDays > 6));
+            }
+            if (filter1 == "1" && filter2 == "1" && filter3 == "1" && filter4 == "1")
+            {
+                final = GetOrders();
             }
             return final;
         }

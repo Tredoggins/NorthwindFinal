@@ -1,0 +1,62 @@
+﻿.col1, .col2 {
+    border-right: 2px solid black;
+}
+
+.col2, .col3 {
+    border-left: 2px solid black;
+}
+
+#row1 > td, #row2 > td {
+    border-bottom: 2px solid black;
+}
+
+#row2 > td, #row3 > td {
+    border-top: 2px solid black;
+}
+
+td {
+    background-color: white;
+    width: 100px;
+    height: 100px;
+    font-size: xx-large;
+    text-align: center;
+}
+
+table {
+    margin: auto;
+}
+
+.clicked {
+    background-color: #569dff;
+}
+
+input {
+    margin-right: auto;
+    margin-left: auto;
+}
+input[type="submit"]{
+    display:none;
+}
+
+form {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+h1, h2 {
+    text-align: center;
+    text-decoration: underline black;
+}
+
+h3 {
+    text-align: center;
+}
+
+div {
+    width: 410px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
